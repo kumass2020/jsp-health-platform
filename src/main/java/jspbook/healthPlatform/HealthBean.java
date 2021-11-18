@@ -3,7 +3,7 @@ package jspbook.healthPlatform;
 import java.sql.*;
 import java.util.*;
 
-import jspbook.addrbook.AddrBook;
+import jspbook.healthPlatform.User;
 
 public class HealthBean {
 	Connection conn = null;
@@ -118,7 +118,7 @@ public class HealthBean {
 		connect();
 		
 		String sql = "select * from user where user_id=?";
-		User user = new Healthplatform();
+		User user = new User();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -144,7 +144,7 @@ public class HealthBean {
 	}
 	
 	// 전체 주소록 목록을 가져오는 메서드
-	public ArrayList<User> getDBList() {
+	public ArrayList<User> getUserDBList() {
 		connect();
 		ArrayList<User> datas = new ArrayList<User>();
 		

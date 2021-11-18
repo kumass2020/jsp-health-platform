@@ -7,7 +7,6 @@ public class User {
 	private String user_email;
 	private String user_phone_num;
 	private String user_birth;
-	private String user_comdept;
 	private String user_memo;
 	
 	public int getUser_id() {
