@@ -40,12 +40,6 @@ public class User {
 	public void setUser_birth(String user_birth) {
 		this.user_birth = user_birth;
 	}
-	public String getUser_comdept() {
-		return user_comdept;
-	}
-	public void setUser_comdept(String user_comdept) {
-		this.user_comdept = user_comdept;
-	}
 	public String getUser_memo() {
 		return user_memo;
 	}

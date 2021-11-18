@@ -69,7 +69,7 @@ public class HealthBean {
 	}
 	
 	// 특정 주소록 게시글 삭제 메서드
-	public boolean deleteDB(int gb_id) {
+	public boolean deleteUserDB(int gb_id) {
 		connect();
 		
 		String sql = "delete from user where user_id=?";
@@ -89,7 +89,7 @@ public class HealthBean {
 	}
 	
 	// 신규 주소록 메시지 추가 메서드
-	public boolean insertDB(User user) {
+	public boolean insertUserDB(User user) {
 		connect();
 		// sql 문자열, gb_id는 자동 등록되므로 입력하지 않는다.
 		
@@ -114,7 +114,7 @@ public class HealthBean {
 	}
 	
 	// 특정 주소록 게시글 가져오는 메서드
-	public User getDB(int gb_id) {
+	public User getUserDB(int gb_id) {
 		connect();
 		
 		String sql = "select * from user where user_id=?";
