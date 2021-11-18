@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	document.cookie = "test=OK";
+</script>
+</head>
+<body>
+<H2>점심 메뉴 주문</H2>
+<hr>
+<form name=form01 method=post action=form01_result.jsp>
+	<table border=1 cellspacing="1" cellpadding="5">
+		<tr>
+		<td>주문자</td>
+		<td><input type=text size=10 name=username></td>
+		<tr>
+		<td>결제방식</td>
+		<td>
+			<select name=paytype>
+				<option selected>계좌이체</option>
+				<option>카드</option>
+				<option>방문 후 현금 지급</option>
+			</select>
+		</td>
+		<tr>
+		<td>메뉴</td>
+		<td>
+			<input type=checkbox name=menu value="짜장면">짜장면</input>
+			<input type=checkbox name=menu value="짬뽕">짬뽕</input>
+			<input type=checkbox name=menu value="탕수육">탕수육</input>
+		</td>
+		<tr>
+			<td colspan=2 align=center><input type=submit value="확인">
+				<input type=reset value="취소">
+			</td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>
