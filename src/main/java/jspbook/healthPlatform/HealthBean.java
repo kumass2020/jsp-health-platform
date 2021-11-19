@@ -42,11 +42,10 @@ public class HealthBean {
 		}
 	}
 	
-	// 수정된 주소록 내용 갱신을 위한 메서드
 	public boolean updateUserDB(User user) {
 		connect();
 		
-		String sql = "update User set user_name=?, user_email=?, user_birth=?,"
+		String sql = "update user set user_name=?, user_email=?, user_birth=?,"
 				+ "user_phone_num=?, user_memo=? where user_id=?";
 		
 		try {
@@ -68,7 +67,6 @@ public class HealthBean {
 		return true;
 	}
 	
-	// 특정 주소록 게시글 삭제 메서드
 	public boolean deleteUserDB(int gb_id) {
 		connect();
 		
@@ -88,7 +86,6 @@ public class HealthBean {
 		return true;
 	}
 	
-	// 신규 주소록 메시지 추가 메서드
 	public boolean insertUserDB(User user) {
 		connect();
 		// sql 문자열, gb_id는 자동 등록되므로 입력하지 않는다.
@@ -113,7 +110,6 @@ public class HealthBean {
 		return true;
 	}
 	
-	// 특정 주소록 게시글 가져오는 메서드
 	public User getUserDB(int gb_id) {
 		connect();
 		
@@ -143,7 +139,6 @@ public class HealthBean {
 		return user;
 	}
 	
-	// 전체 주소록 목록을 가져오는 메서드
 	public ArrayList<User> getUserDBList() {
 		connect();
 		ArrayList<User> datas = new ArrayList<User>();
@@ -173,5 +168,121 @@ public class HealthBean {
 		return datas;
 	}
 	
+	public boolean updateGymDB(Gym gym) {
+		connect();
+		
+		String sql = "update gym set gym_name=?, gym_address=?, user_id=?, where gym_id=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, gym.getGym_name());
+			pstmt.setString(2, gym.getGym_address());
+			pstmt.setInt(3, gym.getUser_id());
+			pstmt.setInt(4, gym.getGym_id());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			disconnect();
+		}
+		return true;
+	}
+	
+	public boolean deleteGymDB(int gb_id) {
+		connect();
+		
+		String sql = "delete from gym where gym_id=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, gb_id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			disconnect();
+		}
+		return true;
+	}
+	
+	public boolean insertGymDB(Gym gym) {
+		connect(); 
+		// sql 문자열, gb_id는 자동 등록되므로 입력하지 않는다.
+		
+		String sql="insert into gym(gym_name, gym_address, user_id) values(?,?,?)";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, gym.getGym_name());
+			pstmt.setString(2, gym.getGym_address());
+			pstmt.setInt(3, gym.getUser_id());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			disconnect();
+		}
+		return true;
+	}
+	
+	public Gym getGymDB(int gb_id) {
+		connect();
+		
+		String sql = "select * from gym where gym_id=?";
+		Gym gym = new Gym();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, gb_id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			// 데이터가 하나만 있으므로 rs.next()를 한번만 실행한다.
+			rs.next();
+			gym.setGym_id(rs.getInt("gym_id"));
+			gym.setGym_name(rs.getString("gym_name"));
+			gym.setGym_address(rs.getString("gym_address"));
+			gym.setUser_id(rs.getInt("user_id"));
+			rs.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			disconnect();
+		}
+		return gym;
+	}
+	
+	public ArrayList<Gym> getGymDBList() {
+		connect();
+		ArrayList<Gym> datas = new ArrayList<Gym>();
+		
+		String sql = "select * from gym order by gym_id desc";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Gym gym = new Gym();
+				
+				gym.setGym_id(rs.getInt("gym_id"));
+				gym.setGym_name(rs.getString("gym_name"));
+				gym.setGym_address(rs.getString("gym_address"));
+				gym.setUser_id(rs.getInt("user_id"));
+				datas.add(gym);
+			}
+			rs.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			disconnect();
+		}
+		return datas;
+	}
 	
 }
