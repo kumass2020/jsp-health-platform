@@ -39,9 +39,93 @@
 <jsp:useBean id="hp" scope="request" class="jspbook.healthPlatform.Gym" />
 
 <body>
-<div align="center">
-<H2>주소록:수정화면 </H2>
-<HR>
+<div align="center"> 
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <!-- Container wrapper -->
+      <div class="container">
+        <!-- Navbar brand -->
+        <a class="navbar-brand me-2" href="healthPlatform_control.jsp?action=userList">
+          <img
+            src="logo.png"
+            height="40"
+            alt=""
+            loading="lazy"
+            style="margin-top: -1px"
+            width="80"
+          />
+        </a>
+
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarButtonsExample"
+          aria-controls="navbarButtonsExample"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+          <!-- Left links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <!-- link something -->
+              </a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="healthPlatform_control.jsp?action=userList">유저목록</a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="healthPlatform_control.jsp?action=gymList">헬스장</a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="healthPlatform_control.jsp?action=reservationList">예약</a>
+            </li>
+          </ul>
+          <!-- Left links -->
+			
+          <div class="d-flex align-items-center">
+          <% if ((String)session.getAttribute("id") == null) {%>	
+            <button
+              type="button"
+              class="btn btn-link px-3 me-2"
+              onclick="location.href='sessionLogin.jsp'"
+            >
+              Login
+            </button>
+            <button type="button" class="btn btn-primary me-3" onclick="location.href='user_form.jsp'">Sign up</button>
+          <% }else {%>
+          	<button type="button" class="btn btn-primary me-3" onclick="location.href='user_list.jsp'">Logout</button>
+          <% session.invalidate();} %>
+          </div>
+        </div>
+        <!-- Collapsible wrapper -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    
+    <div class="my-5"></div>
+    
+   <h3>헬스장:수정화면</h3>
+   <hr style="max-width:850px"> 
+    <!-- Navbar -->
+   
+
 [<a href=healthPlatform_control.jsp?action=gymList>헬스장 목록으로</a>] <p>
 <form name=form1 method=post action=healthPlatform_control.jsp>
 <input type=hidden name="gym_id" value="<%=hp.getGym_id()%>">

@@ -7,7 +7,6 @@ public class Reservation {
 	private int trainer_id;
 	private int reservation_id;
 	private String reservation_time;
-	private String reservation_address;
 	
 	public int getReservation_id() {
 		return reservation_id;

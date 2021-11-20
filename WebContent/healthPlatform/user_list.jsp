@@ -88,23 +88,7 @@
 
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">예약</a>
-            </li>
-          </ul>
-
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                운동법
-              </a>
-            </li>
-          </ul>
-          
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                운동시간
-              </a>
+              <a class="nav-link" href="healthPlatform_control.jsp?action=reservationList">예약</a>
             </li>
           </ul>
           <!-- Left links -->
@@ -154,6 +138,15 @@
 				}
 			 %>
 		</table>
+</form>
+<form method=post action=healthPlatform_control.jsp>
+<input type=hidden name="action" value="search">
+	<select name="ch1">
+		<option value="no">글번호</option>
+		<option value="name">이름</option>
+	</select>
+	<input type="text" name="ch2">
+	<input type="submit" value="검색하기">
 </form>
 </div>
 <!-- MDB -->

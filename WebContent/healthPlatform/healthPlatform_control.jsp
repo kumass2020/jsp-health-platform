@@ -6,8 +6,10 @@
 <jsp:useBean id="hp" class="jspbook.healthPlatform.HealthBean"/>
 <jsp:useBean id="user" class="jspbook.healthPlatform.User"/>
 <jsp:useBean id="gym" class="jspbook.healthPlatform.Gym"/>
+<jsp:useBean id="reservation" class="jspbook.healthPlatform.Reservation"/>
 <jsp:setProperty property="*" name="user"/>
 <jsp:setProperty property="*" name="gym"/>
+<jsp:setProperty property="*" name="reservation"/>
 
 <%
 	//post 전송 데이터 한글 처리
@@ -77,6 +79,24 @@
 		out.println("<script>alert('action 파라미터를 확인해 주세요.')</script>");
 	}
 	
+//	if(action.equals("search")) {
+//		int flag = 0;
+
+//		String ch1 = request.getParameter("ch1");
+//		int ch2 = Integer.parseInt(request.getParameter("ch2"));
+		
+		//if(ch1.equals("글번호")) {
+		//	ch2 = Integer.parseInt(ch2);
+		//	flag = 1;
+		//}
+		
+	//		ch2 = Integer.parseInt(ch2);
+		
+//		ArrayList<User> datas = hp.searchUserDB(1, ch2);
+//		request.setAttribute("datas", datas);
+//		pageContext.forward("user_list.jsp");
+//	}
+	
 	if(action.equals("gymList")) {
 		ArrayList<Gym> datas = hp.getGymDBList();
 		request.setAttribute("datas", datas);
@@ -113,6 +133,50 @@
 	else if (action.equals("gymDelete")) {
 		if(hp.deleteGymDB(gym.getGym_id())) {
 			response.sendRedirect("healthPlatform_control.jsp?action=gymList");
+		}
+		else
+			throw new Exception("DB 삭제 오류");
+	}
+	else {
+		out.println("<script>alert('action 파라미터를 확인해 주세요.')</script>");
+	}
+	
+	if(action.equals("reservationList")) {
+		ArrayList<Reservation> datas = hp.getReservationDBList();
+		request.setAttribute("datas", datas);
+		pageContext.forward("reservation_list.jsp");
+	}
+	// 유저 등록 요청 시
+	else if(action.equals("reservationInsert")) {
+		if(hp.insertReservationDB(reservation)) {
+			response.sendRedirect("healthPlatform_control.jsp?action=reservationList");
+		}
+		else
+			throw new Exception("DB 입력오류");
+	}
+	// 유저 수정 페이지 요청 시
+	else if(action.equals("reservationEdit")) {
+		Reservation _reservation = hp.getReservationDB(reservation.getReservation_id());
+		if(!request.getParameter("upasswd").equals("1234")) {
+			out.println("<scrtipt>alert('비밀번호가 틀렸습니다.!!');history.go(-1);</script>");
+		}
+		else {
+			request.setAttribute("hp", _reservation);
+			pageContext.forward("reservation_edit_form.jsp");
+		}
+	}
+	// 유저 수정 등록 요청인 경우
+	else if(action.equals("reservationUpdate")) {
+		if(hp.updateReservationDB(reservation)) {
+			response.sendRedirect("healthPlatform_control.jsp?action=reservationList");
+		}
+		else
+			throw new Exception("DB 갱신오류");
+	}
+	// 주소록 삭제 요청인 경우
+	else if (action.equals("reservationDelete")) {
+		if(hp.deleteReservationDB(reservation.getReservation_id())) {
+			response.sendRedirect("healthPlatform_control.jsp?action=reservationList");
 		}
 		else
 			throw new Exception("DB 삭제 오류");

@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" errorPage="healthPlatform_error.jsp"%>
+    pageEncoding="UTF-8" errorPage="healthPlatform_error.jsp" import="java.util.*, jspbook.healthPlatform.*"%>
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>유저 정보:작성화면</title>
 <link rel="stylesheet" href="healthplatform.css" type="text/css" media="screen" />
+
+<script type="text/javascript">
+	function check(reservation_id) {
+		pwd = prompt('수정/삭제 하려면 비밀번호를 넣으세요');
+		document.location.href="healthPlatform_control.jsp?action=reservationEdit&reservation_id="+reservation_id+"&upasswd="+pwd;
+	}
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>주소록:목록화면</title>
 <!-- Font Awesome -->
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -22,6 +30,8 @@
   rel="stylesheet"
 />
 </head>
+<jsp:useBean id="datas" scope="request" class="java.util.ArrayList" />
+
 <body>
 <div align="center"> 
     <!-- Navbar -->
@@ -105,33 +115,34 @@
     
     <div class="my-5"></div>
     
-   <h3>헬스장:등록화면</h3>
+   <h3>예약 목록</h3>
    <hr style="max-width:850px"> 
     <!-- Navbar -->
    
-[<a href=healthPlatform_control.jsp?action=gymList>헬스장 목록으로</a>] <P>
-<form name=form1 method=post action=healthPlatform_control.jsp>
-<input type=hidden name="action" value="gymInsert">
 
-<table border="1">
-  <tr>
-    <th>이 름</th>	
-    <td><input type="text" name="gym_name" maxlength="15"></td>
-  </tr>
-  <tr>
-    <th>주 소</th>
-    <td><input type="text" name="gym_address"></td>
-  </tr>  
-  <tr>
-    <th>트레이너</th>
-    <td><input type="number" name="user_id"></td>
-  </tr>
-  <tr>
-    <td colspan=2 align=center><input type=submit value="저장"><input type=reset value="취소"></td>
-</tr>
-</table>
+ 
+   [<a href=reservation_form.jsp>예약 등록</a>]<p>
+    <!-- Navbar -->
+   
+
+   
+<form>
+		<table border="1">
+			<tr><th>번 호</th><th>시 간</th><th>헬스장</th><th>트레이너</th></tr>
+			<%
+				for(Reservation  hp : (ArrayList<Reservation>)datas) {
+			%>
+			  <tr>
+			   <td><a href="javascript:check(<%=hp.getReservation_id()%>)"><%=hp.getReservation_id() %></a></td>
+				<td><%=hp.getReservation_time() %></td>
+				<td><%=hp.getGym_id() %></td>
+				<td><%=hp.getUser_id() %></td>
+			  </tr>
+			 <%
+				}
+			 %>
+		</table>
 </form>
-
 </div>
 <!-- MDB -->
 <script

@@ -23,7 +23,7 @@
 />
 </head>
 <body>
-<div align="center"> 
+<div align="center">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <!-- Container wrapper -->
@@ -105,23 +105,22 @@
     
     <div class="my-5"></div>
     
-   <h3>헬스장:등록화면</h3>
+   <h3>예약:등록화면</h3>
    <hr style="max-width:850px"> 
     <!-- Navbar -->
-   
-[<a href=healthPlatform_control.jsp?action=gymList>헬스장 목록으로</a>] <P>
+[<a href=healthPlatform_control.jsp?action=reservationList>예약 목록으로</a>] <P>
 <form name=form1 method=post action=healthPlatform_control.jsp>
-<input type=hidden name="action" value="gymInsert">
+<input type=hidden name="action" value="reservationInsert">
 
 <table border="1">
   <tr>
-    <th>이 름</th>	
-    <td><input type="text" name="gym_name" maxlength="15"></td>
-  </tr>
-  <tr>
-    <th>주 소</th>
-    <td><input type="text" name="gym_address"></td>
+    <th>시 간</th>	
+    <td><input type="text" name="reservation_time" maxlength="15"></td>
   </tr>  
+  <tr>
+    <th>헬스장</th>
+    <td><input type="number" name="gym_id"></td>
+  </tr>
   <tr>
     <th>트레이너</th>
     <td><input type="number" name="user_id"></td>
