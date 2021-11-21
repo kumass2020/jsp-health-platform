@@ -14,7 +14,7 @@ request.setCharacterEncoding("UTF-8");
 String id = request.getParameter("id");
 String pw = request.getParameter("pw");
 
-String dbId = "poiuy", dbPw = "1234";
+String dbId = "1", dbPw = "1234";
 
 if (dbId.equals(id)) {
 	if (dbPw.equals(pw)) {

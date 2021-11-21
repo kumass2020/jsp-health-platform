@@ -13,7 +13,7 @@
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>주소록:목록화면</title>
+<title>목록화면</title>
 <!-- Font Awesome -->
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -91,6 +91,12 @@
               <a class="nav-link" href="healthPlatform_control.jsp?action=reservationList">예약</a>
             </li>
           </ul>
+          
+		  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="healthPlatform_control.jsp?action=timeList">운동시간</a>
+            </li>
+          </ul>
           <!-- Left links -->
 			
           <div class="d-flex align-items-center">
@@ -104,8 +110,8 @@
             </button>
             <button type="button" class="btn btn-primary me-3" onclick="location.href='user_form.jsp'">Sign up</button>
           <% }else {%>
-          	<button type="button" class="btn btn-primary me-3" onclick="location.href='user_list.jsp'">Logout</button>
-          <% session.invalidate();} %>
+          	<button type="button" class="btn btn-primary me-3" onclick="location.href='logout.jsp'">Logout</button>
+          <% } %>
           </div>
         </div>
         <!-- Collapsible wrapper -->
